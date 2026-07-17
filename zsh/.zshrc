@@ -96,51 +96,6 @@ compdef _ssctl ssctl
 # Add zoxide
 eval "$(zoxide init --cmd cd zsh)"
 
-# pipx — cache completion similarly
-# Run once: register-python-argcomplete pipx > ~/.config/zsh/pipx-completion.zsh
-if [[ -f "$HOME/.config/zsh/pipx-completion.zsh" ]]; then
-  source "$HOME/.config/zsh/pipx-completion.zsh"
-else
-  eval "$(register-python-argcomplete pipx)"
-fi
-
-# NVM — lazy load (saves ~55ms; loads on first call to node/npm/nvm)
-export NVM_DIR="$HOME/.nvm"
-nvm() {
-  unfunction nvm node npm npx yarn m2t
-  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
-  nvm "$@"
-}
-node() {
-  nvm
-  node "$@"
-}
-npm() {
-  nvm
-  npm "$@"
-}
-npx() {
-  nvm
-  npx "$@"
-}
-yarn() {
-  nvm
-  yarn "$@"
-}
-m2t() {
-  nvm
-  m2t "$@"
-}
-
-# Conda — source hook file directly instead of running subprocess every launch
-# The eval "$(...conda hook...)" forks a process; this avoids it
-# if [ -f "/home/eric/.miniconda3/etc/profile.d/conda.sh" ]; then
-#   source "/home/eric/.miniconda3/etc/profile.d/conda.sh"
-# else
-#   export PATH="/home/eric/.miniconda3/bin:$PATH"
-# fi
-
 # Confirm ssh-agent is running
 if [ -z "$SSH_AUTH_SOCK" ]; then
   eval "$(ssh-agent -s)"
