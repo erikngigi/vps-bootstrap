@@ -16,7 +16,7 @@ alias docker-volume-prune='docker volume rm $(docker volume ls)'
 alias docker-remove-dangling-images='docker rmi $(docker images -f "dangling=true" -q)'
 
 # Changing "ls" to "exa"
-alias la='exa -al --color=always --group-directories-first' # all files and dirs
+alias ls='exa -al --color=always --group-directories-first' # all files and dirs
 
 # bat
 alias cat='batcat'
@@ -39,11 +39,11 @@ alias configrc='nvim_cd ~/.config/'
 alias nvimrc='nvim_cd ~/.config/nvim'
 alias zshrc='nvim_cd ~/.config/zsh'
 alias nv='nvim'
-alias Nv='doas nvim'
+# alias Nv='doas nvim'
 
 # nnn
 alias n='nnn -dr'
-alias N='doas nnn -drx'
+alias N='sudo nnn -drx'
 
 # git
 alias addup='git add'
@@ -67,4 +67,4 @@ alias cp='cpg'
 alias mv='mvg'
 
 # Replace sudo with doas
-alias sudo='doas'
+# alias sudo='doas'
