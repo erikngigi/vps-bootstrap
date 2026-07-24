@@ -38,7 +38,7 @@ plug "$HOME/.config/zsh/zsh-aliases.sh"
 # Load compinit
 autoload -Uz compinit
 if [[ -n $ZDOTDIR/.zcompdump(#qN.mh+24) ]]; then
-  compinit # dump is stale — regenerate
+  compinit -u # dump is stale — regenerate
 else
   compinit -C # dump is fresh — skip audit, saves ~400ms
 fi
