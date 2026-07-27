@@ -14,6 +14,17 @@ setopt HIST_IGNORE_SPACE
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# Load compinit
+autoload -Uz compinit
+if [[ -n $ZDOTDIR/.zcompdump(#qN.mh+24) ]]; then
+  compinit -u # dump is stale — regenerate
+else
+  compinit -i -C # dump is fresh — skip audit, saves ~400ms
+fi
+
+autoload -Uz bashcompinit
+bashcompinit
+
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
@@ -25,7 +36,6 @@ plug "hlissner/zsh-autopair"
 plug "zsh-users/zsh-history-substring-search"
 plug "zap-zsh/fzf"
 plug "zsh-users/zsh-autosuggestions"
-plug "macunha1/zsh-terraform"
 plug "zsh-users/zsh-syntax-highlighting"
 
 # Custom configurations come after community plugins
@@ -34,17 +44,6 @@ plug "$HOME/.config/zsh/zsh-functions.sh"
 plug "$HOME/.config/zsh/zsh-prompt.sh"
 plug "$HOME/.config/zsh/zsh-vim.sh"
 plug "$HOME/.config/zsh/zsh-aliases.sh"
-
-# Load compinit
-autoload -Uz compinit
-if [[ -n $ZDOTDIR/.zcompdump(#qN.mh+24) ]]; then
-  compinit -u # dump is stale — regenerate
-else
-  compinit -C # dump is fresh — skip audit, saves ~400ms
-fi
-
-autoload -Uz bashcompinit
-bashcompinit
 
 # Completion styles after compinit
 zstyle ':completion:*' special-dirs false
